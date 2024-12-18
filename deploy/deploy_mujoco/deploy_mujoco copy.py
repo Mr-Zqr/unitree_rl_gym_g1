@@ -76,12 +76,15 @@ if __name__ == "__main__":
     # load policy
     policy = torch.jit.load(policy_path)
 
+    # print the size of d.qpos
+
     with mujoco.viewer.launch_passive(m, d) as viewer:
         # Close the viewer automatically after simulation_duration wall-seconds.
         start = time.time()
+        print("size: ", d.qpos.shape)
         while viewer.is_running() and time.time() - start < simulation_duration:
             step_start = time.time()
-            tau = pd_control(target_dof_pos, d.qpos[7:], kps, np.zeros_like(kds), d.qvel[6:], kds)
+            tau = pd_control(target_dof_pos, d.qpos, kps, np.zeros_like(kds), d.qvel, kds)
             d.ctrl[:] = tau
             # mj_step can be replaced with code that also evaluates
             # a policy and applies a control signal before stepping the physics.
