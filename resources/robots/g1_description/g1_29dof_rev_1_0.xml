@@ -1,6 +1,8 @@
 <mujoco model="g1_29dof_rev_1_0">
   <compiler angle="radian" meshdir="meshes"/>
-
+  <default>
+    <joint damping="0.001" armature="0.01" frictionloss="0.1"/>
+  </default>
   <asset>
     <mesh name="pelvis" file="pelvis.STL"/>
     <mesh name="pelvis_contour_link" file="pelvis_contour_link.STL"/>
@@ -40,9 +42,9 @@
   </asset>
 
   <worldbody>
-    <body name="pelvis" pos="0 0 0.793">
+    <body name="pelvis" pos="0 0 0.893">
       <inertial pos="0 0 -0.07605" quat="1 0 -0.000399148 0" mass="3.813" diaginertia="0.010549 0.0093089 0.0079184"/>
-      <joint name="floating_base_joint" type="free" limited="false" actuatorfrclimited="false"/>
+      <!-- <joint name="floating_base_joint" type="free" limited="false" actuatorfrclimited="false"/> -->
       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1" mesh="pelvis"/>
       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.7 0.7 0.7 1" mesh="pelvis_contour_link"/>
       <geom type="mesh" rgba="0.7 0.7 0.7 1" mesh="pelvis_contour_link"/>
@@ -273,7 +275,21 @@
     <gyro name="imu-pelvis-angular-velocity" site="imu_in_pelvis" noise="5e-4" cutoff="34.9"/>
     <accelerometer name="imu-pelvis-linear-acceleration" site="imu_in_pelvis" noise="1e-2" cutoff="157"/>
   </sensor>
+  <contact>
+    <exclude body1="pelvis" body2="left_hip_pitch_link"/>
+    <exclude body1="left_hip_pitch_link" body2="left_hip_roll_link"/>
+    <exclude body1="left_hip_roll_link" body2="left_hip_yaw_link"/>
+    <exclude body1="left_hip_yaw_link" body2="left_knee_link"/>
+    <exclude body1="left_knee_link" body2="left_ankle_pitch_link"/>
+    <exclude body1="left_ankle_pitch_link" body2="left_ankle_roll_link"/>
 
+    <exclude body1="pelvis" body2="right_hip_pitch_link"/>
+    <exclude body1="right_hip_pitch_link" body2="right_hip_roll_link"/>
+    <exclude body1="right_hip_roll_link" body2="right_hip_yaw_link"/>
+    <exclude body1="right_hip_yaw_link" body2="right_knee_link"/>
+    <exclude body1="right_knee_link" body2="right_ankle_pitch_link"/>
+    <exclude body1="right_ankle_pitch_link" body2="right_ankle_roll_link"/>
+  </contact>
 
   <!-- setup scene -->
   <statistic center="1.0 0.7 1.0" extent="0.8"/>

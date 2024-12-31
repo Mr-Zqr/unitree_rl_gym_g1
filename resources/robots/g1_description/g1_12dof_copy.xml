@@ -163,4 +163,9 @@
     <motor name="right_ankle_pitch_joint" joint="right_ankle_pitch_joint"/>
     <motor name="right_ankle_roll_joint" joint="right_ankle_roll_joint"/>
   </actuator>
+  <contact>
+    <exclude body1="pelvis" body2="left_hip_pitch_link"/>
+    <exclude body1="left_hip_pitch_link" body2="left_hip_roll_link"/>
+
+  </contact>
 </mujoco>

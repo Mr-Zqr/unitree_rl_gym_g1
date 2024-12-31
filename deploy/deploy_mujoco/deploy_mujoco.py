@@ -81,14 +81,17 @@ if __name__ == "__main__":
         start = time.time()
         while viewer.is_running() and time.time() - start < simulation_duration:
             step_start = time.time()
+            # pd控制器，传入目标关节位置，当前关节位置，kp，目标关节速度(0)，当前关节速度，kd  
             tau = pd_control(target_dof_pos, d.qpos[7:], kps, np.zeros_like(kds), d.qvel[6:], kds)
+            # 将计算出的控制力赋值给控制器
             d.ctrl[:] = tau
             # mj_step can be replaced with code that also evaluates
             # a policy and applies a control signal before stepping the physics.
+            # mujoco 仿真器的step函数，传入模型和数据
             mujoco.mj_step(m, d)
 
             counter += 1
-            if counter % control_decimation == 0:
+            if counter % control_decimation == 0: # 作用：降低控制频率
                 # Apply control signal here.
 
                 # create observation

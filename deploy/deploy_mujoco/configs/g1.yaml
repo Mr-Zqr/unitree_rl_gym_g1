@@ -1,6 +1,8 @@
 # 
 policy_path: "{LEGGED_GYM_ROOT_DIR}/deploy/pre_train/g1/motion.pt"
-xml_path: "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1_description/scene.xml"
+xml_path: "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1_description/g1_29dof_rev_1_0.xml"
+# xml_path: "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1_description/g1_12dof_copy.xml"
+# xml_path: "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1_description/scene.xml"
 
 # Total simulation time
 simulation_duration: 60.0
@@ -9,11 +11,25 @@ simulation_dt: 0.002
 # Controller update frequency (meets the requirement of simulation_dt * controll_decimation=0.02; 50Hz)
 control_decimation: 10
 
-kps: [100, 100, 100, 150, 40, 40, 100, 100, 100, 150, 40, 40]
-kds: [2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2]
+# kps: [100, 100, 100, 150, 40, 40, 100, 100, 100, 150, 40, 40]
+# kds: [2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2]
 
-default_angles: [-0.1,  0.0,  0.0,  0.3, -0.2, 0.0, 
-                  -0.1,  0.0,  0.0,  0.3, -0.2, 0.0]
+kps: [200, 200, 200, 150, 40, 40, 
+      200, 200, 200, 150, 40, 40, 
+      100, 100, 100, 
+      20,  20,  20,  20,  20, 20, 20,
+      20,  20,  20,  20,  20, 20, 20,]
+kds: [2,   2,   2,   4,   2,  2, 
+      2,   2,   2,   4,   2,  2,
+      4,   4,   4, 
+      2,   2,   2,   2,   2,  2,  2,
+      2,   2,   2,   2,   2,  2,  2,]
+
+default_angles: [ -0.1,  0.0,  0.0,  0.3, -0.2, 0.0, 
+                  -0.1,  0.0,  0.0,  0.3, -0.2, 0.0,
+                  0.0,   0.0,  0.0,   
+                  0.0,   0.0,  0.0,  0.0,  0.0, 0.0, 0.0,
+                  0.0,   0.0,  0.0,  0.0,  0.0, 0.0, 0.0,]
 
 ang_vel_scale: 0.25
 dof_pos_scale: 1.0
@@ -25,3 +41,37 @@ num_actions: 12
 num_obs: 47
 
 cmd_init: [0.0, 0, 0]
+
+# 1. left_hip_pitch
+# 2. left_hip_roll
+# 3. left_hip_yaw
+# 4. left_knee_
+# 5. left_ankle_pitch
+# 6. left_ankle_roll
+
+# 7. right_hip_pitch
+# 8. right_hip_roll
+# 9. right_hip_yaw
+# 10. right_knee_
+# 11. right_ankle_pitch
+# 12. right_ankle_roll
+
+# 13. waist_yaw
+# 14. waist_roll
+# 15. waist_pitch
+
+# 16. left_shoulder_pitch
+# 17. left_shoulder_roll
+# 18. left_shoulder_yaw
+# 19. left_elbow
+# 20. left_wrist_roll
+# 21. left_wrist_pitch
+# 22. left_wrist_yaw
+
+# 23. left_shoulder_pitch
+# 24. left_shoulder_roll
+# 25. left_shoulder_yaw
+# 26. left_elbow
+# 27. left_wrist_roll
+# 28. left_wrist_pitch
+# 29. left_wrist_yaw
